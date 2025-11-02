@@ -57,7 +57,7 @@ RUN export DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true \
     && apt-get -q install -y \
       libjemalloc2 \
       ca-certificates \
-      tzdata
+      tzdata \
     && rm -r /var/lib/apt/lists/*
 
 # Create a hummingbird user and group with /app as its home directory
