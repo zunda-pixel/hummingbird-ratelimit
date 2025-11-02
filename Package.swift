@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
   name: "hummingbird-ratelimit",
   platforms: [
-    .macOS(.v26)
+    .macOS(.v18)
   ],
   products: [
     .library(
