@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
   name: "hummingbird-ratelimit",
   platforms: [
-    .macOS(.v26),
+    .macOS(.v26)
   ],
   products: [
     .library(
@@ -16,7 +16,7 @@ let package = Package(
     .executable(
       name: "App",
       targets: ["App"]
-    )
+    ),
   ],
   dependencies: [
     .package(url: "https://github.com/hummingbird-project/hummingbird.git", from: "2.0.0"),
@@ -33,7 +33,7 @@ let package = Package(
     .target(
       name: "RateLimit",
       dependencies: [
-        .product(name: "Hummingbird", package: "hummingbird"),
+        .product(name: "Hummingbird", package: "hummingbird")
       ]
     ),
     .testTarget(

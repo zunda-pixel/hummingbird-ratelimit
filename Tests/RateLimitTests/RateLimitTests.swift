@@ -1,7 +1,8 @@
-import Testing
-@testable import RateLimit
-import HummingbirdTesting
 import Hummingbird
+import HummingbirdTesting
+import Testing
+
+@testable import RateLimit
 
 @Suite
 struct RateLimitTests {
@@ -11,14 +12,14 @@ struct RateLimitTests {
     router.add(middleware: RateLimitMiddleware())
 
     router.get("/hello") { _, _ in
-        return "hello"
+      return "hello"
     }
     let app = Application(router: router)
-    
+
     for _ in 0..<1 {
       try await app.test(.live) { client in
         // does my app return "hello" in the body for this route
-        let _ = try await client.execute(uri: "/hello", method: .get)//, headers: [:], body: nil)
+        let _ = try await client.execute(uri: "/hello", method: .get)  //, headers: [:], body: nil)
       }
     }
   }
