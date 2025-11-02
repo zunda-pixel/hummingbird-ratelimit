@@ -1,4 +1,4 @@
-// swift-tools-version: 6.2
+// swift-tools-version: 6.1
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
   name: "hummingbird-ratelimit",
   platforms: [
-    .macOS(.v26),
+    .macOS(.v15)
   ],
   products: [
     .library(
@@ -16,7 +16,7 @@ let package = Package(
     .executable(
       name: "App",
       targets: ["App"]
-    )
+    ),
   ],
   dependencies: [
     .package(url: "https://github.com/hummingbird-project/hummingbird.git", from: "2.0.0"),
@@ -33,7 +33,7 @@ let package = Package(
     .target(
       name: "RateLimit",
       dependencies: [
-        .product(name: "Hummingbird", package: "hummingbird"),
+        .product(name: "Hummingbird", package: "hummingbird")
       ]
     ),
     .testTarget(
