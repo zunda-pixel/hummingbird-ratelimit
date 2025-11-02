@@ -15,7 +15,7 @@ struct AppCommand: AsyncParsableCommand {
     let router = Router()
     router.add(middleware: RateLimitMiddleware())
     router.get("hello") { request, _ -> String in
-      return "Hello"
+      return "Hello123"
     }
     // create application using router
     let app = Application(
