@@ -1,5 +1,6 @@
 import HTTPTypes
 import Hummingbird
+import Logging
 
 public struct RateLimitMiddleware<Context: RequestContext>: RouterMiddleware {
   public init() {}
@@ -9,12 +10,23 @@ public struct RateLimitMiddleware<Context: RequestContext>: RouterMiddleware {
     context: Context,
     next: (HummingbirdCore.Request, Context) async throws -> HummingbirdCore.Response
   ) async throws -> HummingbirdCore.Response {
-    print(input.headers)
-    print(input.uri)
-    print(input.head)
-
-    print(input.headers[.xForwardedFor])
-    print(input.headers[.cfConnectionIP])
+    let logger = Logger(label: "RateLimitMiddleware")
+    logger.info(
+      "Request",
+      metadata: [
+        "headerFields": .dictionary(input.headers.reduce(into: Logger.Metadata(), { partialResult, field in
+          partialResult[field.name.rawName] = .string(field.value)
+        })),
+        "uri": .string(input.uri.string),
+        "head": .dictionary([
+          "method": .string(input.head.method.rawValue),
+          "path": .string(input.head.path ?? "no path"),
+          "headerFields": .dictionary(input.head.headerFields.reduce(into: Logger.Metadata(), { partialResult, field in
+            partialResult[field.name.rawName] = .string(field.value)
+          }))
+        ])
+      ]
+    )
 
     return try await next(input, context)
   }
